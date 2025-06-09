@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Liste des Patients</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+</head>
+<body>
+
+
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="#">Gestion Des Consultations</a>
+        <div class="collapse navbar-collapse">
+            <ul class="navbar-nav me-auto">
+                <li class="nav-item"><a class="nav-link active" href="/patients">Patients</a></li>
+                <li class="nav-item"><a class="nav-link" href="/medecins">Médecins</a></li>
+                <li class="nav-item"><a class="nav-link" href="/specialites">Spécialités</a></li>
+                <li class="nav-item"><a class="nav-link" href="/villes">Villes</a></li>
+                <li class="nav-item"><a class="nav-link" href="/consultations">Consultations</a></li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<div class="container mt-5 shadow-lg px-5 py-5 mb-5 bg-body rounded">
+<!-- Main Content -->
+<h2 class="text-center mb-4">Liste des Patients</h2>
+<a href="/patients/new" class="btn btn-success mb-3">Add New patient</a>
+
+<form class="row gx-2 gy-2 align-items-center mb-4" th:action="@{/patients/search}" method="get">
+    <!-- Nom/Prénom input -->
+    <div class="col-md-5">
+        <input type="text" name="name" class="form-control" placeholder="Nom ou Prénom" th:value="${name}">
+    </div>
+
+    <!-- Date de naissance input -->
+    <div class="col-md-4">
+        <input type="date" name="birthDate" class="form-control" th:value="${birthDate}">
+    </div>
+
+    <!-- Buttons -->
+    <div class="col-md-3 d-flex gap-2">
+        <button type="submit" class="btn btn-primary flex-grow-1">Rechercher</button>
+        <a href="/patients" class="btn btn-secondary flex-grow-1">Réinitialiser</a>
+    </div>
+</form>
+
+
+
+<table class="table table-striped table-hover">
+    <thead>
+    <tr>
+        <th>ID Patient</th>
+        <th>Nom Patient</th>
+        <th>Prenom Patient</th>
+        <th>Date De Naissance</th>
+        <th>Ville</th>
+        <th>Actions</th>
+
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="patient : ${patients}">
+        <td th:text="${patient.id}">1</td>
+        <td th:text="${patient.nomP}"></td>
+        <td th:text="${patient.prenomP}"></td>
+        <td th:text="${patient.dateNaiss}"></td>
+        <td th:text="${patient.ville.nomV}"></td>
+        <td>
+            <a th:href="@{'/patients/edit/' + ${patient.id}}" class="btn btn-primary btn-sm">Edit</a>
+            <a th:href="@{'/patients/delete/' + ${patient.id}}"
+               class="btn btn-danger btn-sm"
+               onclick="return confirm('Are you sure to delete this patient?');">Delete</a>
+        </td>
+    </tr>
+    </tbody>
+</table>
+
+<div th:if="${noResults}" class="alert alert-warning">
+    Aucun patient trouvé pour <strong th:text="${readableFilter}"></strong> :
+    <em th:text="${keyword}">...</em>
+</div>
+</div>
+</body>
+</html>

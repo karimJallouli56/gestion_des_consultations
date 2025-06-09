@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Modifier Consultation</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+</head>
+<body>
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="#">Gestion Des Consultations</a>
+        <div class="collapse navbar-collapse">
+            <ul class="navbar-nav me-auto">
+                <li class="nav-item"><a class="nav-link" href="/patients">Patients</a></li>
+                <li class="nav-item"><a class="nav-link" href="/medecins">Médecins</a></li>
+                <li class="nav-item"><a class="nav-link" href="/specialites">Spécialités</a></li>
+                <li class="nav-item"><a class="nav-link" href="/villes">Villes</a></li>
+                <li class="nav-item"><a class="nav-link active" href="/consultations">Consultations</a></li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<div class="container mt-5 shadow-lg px-5 py-5 mb-5 bg-body rounded">
+    <h2 class="text-center mb-4">Modifier une Consultation</h2>
+
+    <form th:action="@{|/consultations/update?numP=${consultation.id.numP}&numM=${consultation.id.numM}&dateC=${consultation.id.dateC}|}"
+          th:object="${consultation}" method="post">
+
+        <!-- Patient (lecture seule) -->
+        <div class="mb-3">
+            <label class="form-label">
+                Patient
+                <span style="color:red; font-size: 0.9em;">* non modifiable</span>
+            </label>
+            <input type="text" class="form-control"
+                   th:value="${consultation.patient.nomP + ' ' + consultation.patient.prenomP}" readonly>
+            <!-- garder l'id dans un champ caché pour le backend -->
+            <input type="hidden" th:field="*{patient.id}">
+        </div>
+
+        <!-- Médecin (lecture seule) -->
+        <div class="mb-3">
+            <label class="form-label">
+                Médecin
+                <span style="color:red; font-size: 0.9em;">* non modifiable</span>
+            </label>
+            <input type="text" class="form-control"
+                   th:value="${consultation.medecin.nomM + ' ' + consultation.medecin.prenomM}" readonly>
+            <input type="hidden" th:field="*{medecin.id}">
+        </div>
+
+        <!-- Date Consultation (lecture seule) -->
+        <div class="mb-3">
+            <label class="form-label">
+                Date Consultation
+                <span style="color:red; font-size: 0.9em;">* non modifiable</span>
+            </label>
+            <input type="text" class="form-control"
+                   th:value="${consultation.id.dateC}" readonly>
+            <input type="hidden" th:field="*{id.dateC}">
+        </div>
+
+        <!-- Description (modifiable) -->
+        <div class="mb-3">
+            <label class="form-label">Description</label>
+            <textarea class="form-control" th:field="*{description}" rows="3" required></textarea>
+        </div>
+
+        <button type="submit" class="btn btn-success">Enregistrer</button>
+        <a th:href="@{/consultations}" class="btn btn-secondary">Annuler</a>
+    </form>
+
+</div>
+</body>
+</html>

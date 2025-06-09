@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<!--    <style>-->
+<!--        body {-->
+<!--            font-family: Arial, sans-serif;-->
+<!--            margin: 30px;-->
+<!--        }-->
+
+
+<!--        nav {-->
+<!--            background-color: #333;-->
+<!--            padding: 10px;-->
+<!--        }-->
+
+
+<!--        nav a {-->
+<!--            color: white;-->
+<!--            margin-right: 20px;-->
+<!--            text-decoration: none;-->
+<!--        }-->
+
+
+<!--        nav a.active {-->
+<!--            font-weight: bold;-->
+<!--            text-decoration: underline;-->
+<!--        }-->
+
+
+<!--        h2 {-->
+<!--            text-align: center;-->
+<!--        }-->
+
+
+<!--        .btn {-->
+<!--            padding: 6px 12px;-->
+<!--            margin-right: 5px;-->
+<!--            cursor: pointer;-->
+<!--            text-decoration: none;-->
+<!--            color: white;-->
+<!--            border: none;-->
+<!--        }-->
+
+
+<!--        .btn-add {-->
+<!--            background-color: green;-->
+<!--        }-->
+
+
+<!--        .btn-edit {-->
+<!--            background-color: blue;-->
+<!--        }-->
+
+
+<!--        .btn-delete {-->
+<!--            background-color: red;-->
+<!--        }-->
+
+
+<!--        table {-->
+<!--            width: 100%;-->
+<!--            border-collapse: collapse;-->
+<!--            margin-top: 20px;-->
+<!--        }-->
+
+
+<!--        table, th, td {-->
+<!--            border: 1px solid #aaa;-->
+<!--        }-->
+
+
+<!--        th, td {-->
+<!--            padding: 8px;-->
+<!--            text-align: left;-->
+<!--        }-->
+
+
+<!--        th {-->
+<!--            background-color: #eee;-->
+<!--        }-->
+<!--    </style>-->
+<!--</head>-->
+
+
+<head>
+    <meta charset="UTF-8">
+    <title>Liste des Medecins</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+</head>
+<body>
+
+
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="#">Gestion Des Consultations</a>
+        <div class="collapse navbar-collapse">
+            <ul class="navbar-nav me-auto">
+                <li class="nav-item"><a class="nav-link" href="/patients">Patients</a></li>
+                <li class="nav-item"><a class="nav-link active" href="/medecins">Médecins</a></li>
+                <li class="nav-item"><a class="nav-link" href="/specialites">Spécialités</a></li>
+                <li class="nav-item"><a class="nav-link" href="/villes">Villes</a></li>
+                <li class="nav-item"><a class="nav-link" href="/consultations">Consultations</a></li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<div class="container mt-5 shadow-lg px-5 py-5 mb-5 bg-body rounded">
+<!-- Main Content -->
+<h2 class="text-center mb-4"> Liste des Medecins</h2>
+<a href="/medecins/new" class="btn btn-success mb-3">Add New medecin</a>
+
+<form class="row gx-2 gy-2 align-items-center mb-4" th:action="@{/medecins/search}" method="get">
+    <!-- Filter select -->
+    <div class="col-md-2">
+        <select name="filter" class="form-select" required>
+            <option value="" disabled selected>Filtrer par</option>
+            <option value="name" th:selected="${filter == 'name'}">Nom/Prénom</option>
+            <option value="specialite" th:selected="${filter == 'specialite'}">Spécialité</option>
+        </select>
+    </div>
+
+    <!-- Search input -->
+    <div class="col-md-7">
+        <input type="text" name="keyword" class="form-control" placeholder="Rechercher..." required th:value="${keyword}">
+    </div>
+
+    <div class="col-md-3 d-flex gap-2">
+        <button type="submit" class="btn btn-primary flex-grow-1">Rechercher</button>
+        <a href="/medecins" class="btn btn-secondary flex-grow-1">Réinitialiser</a>
+    </div>
+</form>
+<table class="table table-striped table-hover">
+    <thead>
+    <tr>
+        <th>ID Medecin</th>
+        <th>Nom Medecin</th>
+        <th>Prenom Medecin</th>
+        <th>Adresse Medecin</th>
+        <th>Tel Medecin</th>
+        <th>Specialité</th>
+        <th>Actions</th>
+
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="medecin : ${medecins}">
+        <td th:text="${medecin.id}">1</td>
+        <td th:text="${medecin.nomM}"></td>
+        <td th:text="${medecin.prenomM}"></td>
+        <td th:text="${medecin.adresse}"></td>
+        <td th:text="${medecin.tel}"></td>
+        <td th:text="${medecin.codeSp.libelle}"></td>
+        <td>
+            <a th:href="@{'/medecins/edit/' + ${medecin.id}}" class="btn btn-primary btn-sm">Edit</a>
+            <a th:href="@{'/medecins/delete/' + ${medecin.id}}"
+               class="btn btn-danger btn-sm"
+               onclick="return confirm('Are you sure to delete this medecin?');">Delete</a>
+        </td>
+    </tr>
+    </tbody>
+</table>
+
+<div th:if="${noResults}" class="alert alert-warning">
+    Aucun médecin trouvé pour <strong th:text="${readableFilter}"></strong> :
+    <em th:text="${keyword}">...</em>
+</div>
+</div>
+</body>
+</html>
