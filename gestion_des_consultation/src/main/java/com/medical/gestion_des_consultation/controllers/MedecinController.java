@@ -40,34 +40,12 @@ public class MedecinController {
     }
 
 
-//    @GetMapping("/edit/{id}")
-//    public String showEditForm(@PathVariable Long id, Model model) {
-//        model.addAttribute("room", roomService.findById(id));
-//        return "edit-room";
-//    }
-
-
-//    @PostMapping("/update/{id}")
-//    public String updateRoom(@PathVariable Long id, @ModelAttribute Room room) {
-//        roomService.update(id, room);
-//        return "redirect:/rooms";
-//    }
 
 
     @GetMapping("/delete/{id}")
     public String deleteMedecin(@PathVariable Long id) {
         medecinService.deleteById(id);
         return "redirect:/medecins";    }
-//
-//    @GetMapping("/edit/{id}")
-//    public String showEditForm(@PathVariable Long id, Model model) {
-//        Room room = roomService.findById(id);
-//        model.addAttribute("room", room);
-//        return "add-room"; // reuse the form view for edit
-//    }
-
-
-
 
     @GetMapping("/edit/{id}")
     public String showEditMedecinForm(@PathVariable Long id, Model model) {

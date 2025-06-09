@@ -99,29 +99,6 @@ public class ConsultationController {
         return "edit-consultation";
     }
 
-//    @PostMapping("/update")
-//    public String updateConsultation(
-//            @RequestParam("numP") Long numP,
-//            @RequestParam("numM") Long numM,
-//            @RequestParam("dateC") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate dateC,
-//            @ModelAttribute Consultation updatedConsultation) {
-//
-//        Long newPatientId = updatedConsultation.getPatient().getId();
-//        Long newMedecinId = updatedConsultation.getMedecin().getId();
-//        LocalDate newDateC = updatedConsultation.getDateC();
-//
-//        Optional<Patient> patient = patientService.findById(newPatientId);
-//        Optional<Medecin> medecin = medecinService.findById(newMedecinId);
-//
-//        if (patient.isPresent() && medecin.isPresent()) {
-//            updatedConsultation.setPatient(patient.get());
-//            updatedConsultation.setMedecin(medecin.get());
-//            updatedConsultation.setId(new ConsultationId(newPatientId, newMedecinId, newDateC));
-//            consultationService.update(numP, numM, dateC, updatedConsultation);
-//        }
-//
-//        return "redirect:/consultations";
-//    }
 
     @GetMapping("/delete")
     public String deleteConsultation(
@@ -167,7 +144,7 @@ public class ConsultationController {
             model.addAttribute("noResults", true);
         }
 
-        return "list-consultations"; // Make sure this matches your actual view filename
+        return "list-consultations";
     }
 
 

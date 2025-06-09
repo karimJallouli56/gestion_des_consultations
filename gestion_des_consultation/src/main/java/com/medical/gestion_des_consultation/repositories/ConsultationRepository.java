@@ -29,20 +29,4 @@ public interface ConsultationRepository extends JpaRepository<Consultation, Cons
 """)
     List<Consultation> findByMedecinNomContainingIgnoreCase(@Param("fullName") String fullName);
 
-
-
-
-
-    //    // Search by patient name (first or last)
-//    @Query("SELECT c FROM Consultation c " +
-//            "WHERE LOWER(c.patient.nomP) LIKE LOWER(CONCAT('%', :name, '%')) " +
-//            "   OR LOWER(c.patient.prenomP) LIKE LOWER(CONCAT('%', :name, '%'))")
-//    List<Consultation> findByPatientNomContainingIgnoreCase(@Param("name") String name);
-//
-//    // Search by medecin name (first or last)
-//    @Query("SELECT c FROM Consultation c " +
-//            "WHERE LOWER(c.medecin.nomM) LIKE LOWER(CONCAT('%', :name, '%')) " +
-//            "   OR LOWER(c.medecin.prenomM) LIKE LOWER(CONCAT('%', :name, '%'))")
-//    List<Consultation> findByMedecinNomContainingIgnoreCase(@Param("name") String name);
-
 }

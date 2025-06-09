@@ -35,35 +35,10 @@ public class VilleController {
     }
 
 
-//
-//    @GetMapping("/edit/{id}")
-//    public String showEditForm(@PathVariable Long id, Model model) {
-//        model.addAttribute("room", roomService.findById(id));
-//        return "edit-room";
-//    }
-
-
-//    @PostMapping("/update/{id}")
-//    public String updateRoom(@PathVariable Long id, @ModelAttribute Room room) {
-//        roomService.update(id, room);
-//        return "redirect:/rooms";
-//    }
-
-
     @GetMapping("/delete/{id}")
     public String deleteVille(@PathVariable Long id) {
         villeService.deleteById(id);
         return "redirect:/villes";    }
-//
-//    @GetMapping("/edit/{id}")
-//    public String showEditForm(@PathVariable Long id, Model model) {
-//        Room room = roomService.findById(id);
-//        model.addAttribute("room", room);
-//        return "add-room"; // reuse the form view for edit
-//    }
-
-
-
 
     @GetMapping("/edit/{id}")
     public String showEditVilleForm(@PathVariable Long id, Model model) {
