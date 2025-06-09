@@ -13,6 +13,7 @@ import java.time.LocalDate;
 import java.util.List;
 @Controller
 @RequestMapping("/patients")
+//http://localhost:8088/patients
 public class PatientController {
     @Autowired
     private PatientService patientService;

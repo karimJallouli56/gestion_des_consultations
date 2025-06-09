@@ -16,9 +16,9 @@ import org.springframework.format.annotation.DateTimeFormat;
 @Service
 @Transactional
 public class PatientService {
-    @Autowired //injection de depandance
+    @Autowired
     private PatientRepository patientRepository;
-    @Autowired //injection de depandance
+    @Autowired
     private VilleRepository villeRepository;
 
     public Patient save(Patient patient) {

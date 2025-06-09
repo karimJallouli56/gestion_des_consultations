@@ -19,6 +19,7 @@ import java.util.List;
 
 @Controller
 @RequestMapping("/consultations")
+//http://localhost:8088/consultations
 public class ConsultationController {
 
     @Autowired

@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.*;
 
 @Controller
 @RequestMapping("/specialites")
+//http://localhost:8088/specialites
 public class SpecialiteController {
 
     @Autowired

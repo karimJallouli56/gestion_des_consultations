@@ -16,9 +16,9 @@ import java.util.List;
 @Service
 @Transactional
 public class MedecinService {
-    @Autowired //injection de depandance
+    @Autowired
     private MedecinRepository medecinRepository;
-    @Autowired //injection de depandance
+    @Autowired
     private SpecialiteRepository specialiteRepository;
 
     public Medecin save(Medecin medecin) {

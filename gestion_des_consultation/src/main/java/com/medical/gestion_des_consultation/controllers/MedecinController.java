@@ -11,6 +11,7 @@ import java.util.List;
 
 @Controller
 @RequestMapping("/medecins")
+//http://localhost:8088/medecins
 public class MedecinController {
     @Autowired
     private MedecinService medecinService;

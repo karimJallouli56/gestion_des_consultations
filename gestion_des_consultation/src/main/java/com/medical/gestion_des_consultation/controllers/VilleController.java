@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.*;
 
 @Controller
 @RequestMapping("/villes")
+//http://localhost:8088/villes
 public class VilleController {
     @Autowired
     private VilleService villeService;

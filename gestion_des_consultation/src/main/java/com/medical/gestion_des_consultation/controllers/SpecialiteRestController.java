@@ -9,6 +9,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/specialites")
+//http://localhost:8088/api/specialites
 public class SpecialiteRestController {
 
     @Autowired

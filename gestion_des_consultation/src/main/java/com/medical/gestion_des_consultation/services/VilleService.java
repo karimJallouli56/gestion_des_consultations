@@ -14,7 +14,7 @@ import com.medical.gestion_des_consultation.repositories.VilleRepository;
 @Service
 @Transactional
 public class VilleService {
-    @Autowired //injection de depandance
+    @Autowired
     private VilleRepository villeRepository;
 
 
